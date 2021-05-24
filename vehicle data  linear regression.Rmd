@@ -1,0 +1,30 @@
+## linear Regression
+reading file---->>>
+```{r}
+vehicle<-read.csv("vehicle.csv")
+library(dplyr)
+head(vehicle)
+pairs(vehicle[3:5])       ##A matrix of scatterplots is produced.
+```
+##developing multiple linear regression
+```{r}
+results<-lm(lc~Mileage+lh,vehicle)
+results
+summary(results)
+```
+```{r}
+results<-lm(lc~lh,vehicle)
+results
+summary(results)
+```
+```{r}
+reducemodel<-lm(lc~lh,vehicle)
+fullmodel<-lm(lc~Mileage+lh,vehicle)
+anova(reducemodel,fullmodel)  ## analysis of variance table
+```
+## Prediction(default 95% of confidence)
+```{r}
+predict(results,data.frame(lh=10),interval = 'confidence' )
+```
+so fit predicted labour cost for 10 hour is 734.8522 unit.
+
